@@ -8,6 +8,16 @@ This tool is perfect for developers, writers, and anyone who frequently uses abb
 
 Click here for a [**live demo**](https://numeronym-generator.vincevarga.dev).
 
+## Previews
+
+**Light mode**
+
+<img src="light-mode.png" alt="Light mode preview" width="333">
+
+**Dark mode**
+
+<img src="dark-mode.png" alt="Dark mode preview" width="333">
+
 ## Features
 
 - **User-friendly interface**: Type your text, and the numeronym is generated instantly.
@@ -26,15 +36,7 @@ The goal of this project was to learn how to integrate code written in Rust into
 
 All other dependencies were kept at a minimum, so CSS is hand-written, no templating, no JS compilation step (other than wasm bundles).
 
-## Previews
-
-**Light mode**
-
-<img src="light-mode.png" alt="Light mode preview" width="333">
-
-**Dark mode**
-
-<img src="dark-mode.png" alt="Dark mode preview" width="333">
+<img src="ferris.png" alt="Rust Ferris image" width="150">
 
 
 ---
