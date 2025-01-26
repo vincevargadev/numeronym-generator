@@ -6,16 +6,12 @@ Numeronym Generator is a simple web tool that generates numeronyms from input te
 
 This tool is perfect for developers, writers, and anyone who frequently uses abbreviations.
 
----
-
 ## Features
 
 - **User-friendly interface**: Type your text, and the numeronym is generated instantly.
 - **Dark mode support**: Automatically adapts to your system's preferred color scheme.
 - **Lightweight and fast**: Built with modern web technologies for excellent performance.
 - **Multilanguage support**: Use any valid characters in your texts, all will be handled for you.
-
----
 
 ## Technology Stack
 
@@ -27,8 +23,6 @@ The Numeronym Generator is built with the following technologies:
 The goal of this project was to learn how to integrate code written in Rust into a web application without any web frameworks.
 
 All other dependencies were kept at a minimum, so CSS is hand-written, no templating, no JS compilation step (other than wasm bundles).
-
----
 
 ## Previews
 
@@ -46,8 +40,6 @@ All other dependencies were kept at a minimum, so CSS is hand-written, no templa
 ## Deployment
 
 This project is manually deployed, as frequent updates are not expected. It is designed for simple use cases with minimal maintenance.
-
----
 
 ## Setup Guide
 
@@ -72,13 +64,9 @@ Run the Rust tests with `cargo test` to ensure everything is working.
 
 To serve the project locally for development, use `miniserve` with the command `miniserve . --port 8088`. Then, open your browser and navigate to `http://localhost:8088` to see the application in action.
 
----
-
 ## Contributing
 
 This is a small project intended for learning and demonstration purposes, but contributions are welcome. Feel free to open an issue or submit a pull request for bug fixes or improvements.
-
----
 
 ## License
 
