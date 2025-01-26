@@ -6,6 +6,8 @@ Numeronym Generator is a simple web tool that generates numeronyms from input te
 
 This tool is perfect for developers, writers, and anyone who frequently uses abbreviations.
 
+Click here for a [**live demo**](https://numeronym-generator.vincevarga.dev).
+
 ## Features
 
 - **User-friendly interface**: Type your text, and the numeronym is generated instantly.
