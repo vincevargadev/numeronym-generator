@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Numeronym Generator</title>
+    <style>
+      body {
+          font-family: Arial, sans-serif;
+          margin: 0;
+          padding: 0;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: flex-start;
+          min-height: 100vh;
+          background: white;
+      }
+      
+      .container {
+          text-align: center;
+          background: #FBFBFB;
+          border-radius: 6px;
+          border: 0.5px solid black;
+          margin: 1.5rem auto;
+          max-width: 600px;
+          width: 100%;
+          box-sizing: border-box;
+      }
+
+      @media (max-width: 600px) {
+          .container {
+              margin: 0;
+              border-radius: 0;
+              border-left: none;
+              border-right: none;
+          }
+      }
+
+      h1 {
+          margin-bottom: 1rem;
+          color: black;
+      }
+      
+      input {
+          width: 80%;
+          padding: 0.5rem;
+          border: 1px solid #ddd;
+          border-radius: 5px;
+          margin-bottom: 1rem;
+      }
+      
+      input:focus {
+          outline: none;
+          border-color: #007bff;
+          box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+      }
+      
+      #result-placeholder {
+          margin-top: 1rem;
+          font-size: 2.2rem;
+          color: #333;
+          padding-left: 0.5rem;
+          padding-right: 0.5rem;
+      }
+      
+      #result {
+          margin-top: 1rem;
+          font-size: 2.2rem;
+          font-family: monospace;
+          color: #111;
+          padding-left: 0.5rem;
+          padding-right: 0.5rem;
+      }
+
+      .description {
+          text-align: left;
+          padding: 0 2rem 2rem 2rem;
+          line-height: 1.25;
+      }
+      
+
+      footer {
+          width: 100%;
+          text-align: center;
+          background-color: #fbfbfb;
+          color: #555;
+          margin-top: auto;
+          position: relative;
+          border-top: 0.5px solid black;
+      }
+
+      footer .emoji {
+        filter: brightness(0.1);  
+      }
+      
+      footer a {
+          color: #0064d0;
+          text-decoration: none;
+          font-weight: bold;
+      }
+
+      @media (prefers-color-scheme: dark) {
+          body {
+              background: black;
+          }
+
+          .container {
+              background: #030303;
+              border: 0.5px solid white;
+          }
+
+          h1 {
+            color: white; 
+          }
+
+          #result-placeholder {
+             color: #eee; 
+          }
+
+          #result {
+            color: white;  
+          }
+
+          .description {
+              color: #d6d6d6;    
+          }
+        
+          footer {
+              background-color: #030303;
+              color: #eee;
+              border-top: 0.5px solid white;
+          }
+
+          footer .emoji {
+            filter: grayscale(1) brightness(0.9);  
+          }
+
+          footer a {
+            color: #007bff;  
+          }
+      }
+
+      noscript {
+          display: block;
+          padding: 0.5rem;
+          background-color: indianred;
+          color: #fdfdfd;
+          border-top: 0.1rem solid darkred;
+          border-bottom: 0.1rem solid darkred;   
+          border-left: 0.5rem solid darkred;   
+          border-radius: 6px 6px 0 0;
+      }
+
+      @media (max-width: 600px) {
+          noscript {
+              border-radius: 0;
+          }
+      }
+    </style>
+    
+    <link rel="preload" href="./pkg/numeronym_generator_bg.wasm" as="fetch" type="application/wasm" crossorigin="anonymous">
+
+    <meta name="description" content="Generate numeronyms instantly with this easy-to-use numeronym generator. Convert words like localization to l10n in just a click!">
+    <meta name="keywords" content="numeronym, generator, abbreviation, localization, internationalization, l10n, i18n, a11y">
+    <meta name="author" content="Vince Varga">
+    <meta name="robots" content="index, follow">
+
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+
+    <meta property="og:title" content="Numeronym Generator">
+    <meta property="og:description" content="Easily create numeronyms like l10n, i18n, and a11y with this amazing free generator.">
+    <meta property="og:image" content="http://vincevarga.github.io/numeronym-generator/preview.png">
+    <meta property="og:url" content="http://vincevarga.github.io/numeronym-generator">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Numeronym Generator">
+    <meta name="twitter:description" content="Easily create numeronyms like l10n, i18n, and a11y with this amazing free generator.">
+    <meta name="twitter:image" content="http://vincevarga.github.io/preview.png">
+</head>
+<body>
+    <div class="container">
+        <noscript>
+            <p>JavaScript is disabled or not supported by your browser. This app requires JavaScript to function properly.</p>
+            <p><strong>Please enable JavaScript and reload the page.</strong></p>
+        </noscript>
+        <h1>Numeronym Generator</h1>
+        <input
+            type="text"
+            id="input-field"
+            placeholder="Type your text here..."
+        />
+        <div id="result-placeholder">
+            <p>Your numeronym will appear here...</p>
+        </div>
+        <div id="result" style="display: 'none';">
+        </div>
+        <div class="description">
+           <p>
+               A numeronym is a type of abbreviation where a word is shortened by replacing the middle part with a number that represents the count of letters omitted. The first and last letters of the word are retained, with the number placed in between. Numeronyms are commonly used to make long words shorter and easier to remember or type.
+           </p>
+         
+           <p>
+               Some well-known examples of numeronyms include <strong>l10n</strong> for <i>localization</i>, <strong>i18n</strong> for <i>internationalization</i>, <strong>a11y</strong> for <i>accessibility</i>, and <strong>o11y</strong> for <i>observability</i>. These abbreviations are widely used in technical and professional contexts.
+           </p>
+         
+           <p>
+               Let’s take the name <i>numeronym generator</i> as an example to illustrate the process of creating a numeronym. First, remove all spaces from the name, then, take the first letter <strong>n</strong> and the last letter <strong>r</strong>. Next, count the number of letters in between, which is <strong>16</strong>. Combining these parts results in the numeronym <strong>n16r</strong>.
+           </p>
+       </div>
+    </div>
+    <footer>
+        <p>
+            Made with <span class="emoji">❤️</span> by <a class="name" href="https://vincevarga.dev" target="_blank">Vince Varga</a>.
+        </p>
+    </footer>
+    <!-- <script type="module" src="script.js"></script> -->
+    <script type="module">
+      import init, { generate_numeronym } from './pkg/numeronym_generator.js';
+      async function main() {
+          await init();
+          const inputField = document.getElementById('input-field');
+          const result = document.getElementById('result');
+          const resultPlaceholder = document.getElementById('result-placeholder');
+          inputField.addEventListener('input', () => {
+              const inputValue = inputField.value;
+              const numeronym = generate_numeronym(inputValue);
+              if(numeronym.length != 0) {
+                 resultPlaceholder.style.display = 'none';
+                 result.style.display = 'block';
+                 result.innerHTML = `<p>${numeronym}</p>`;
+              } else {
+                 result.style.display = 'none';
+                 resultPlaceholder.style.display = 'block';
+              }
+          });
+      }
+      main();
+    </script>
+</body>
+</html>
