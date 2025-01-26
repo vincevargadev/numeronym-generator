@@ -22,9 +22,24 @@ This tool is perfect for developers, writers, and anyone who frequently uses abb
 The Numeronym Generator is built with the following technologies:
 - **HTML, CSS, and JavaScript**: Provides the core structure, styling, and interactivity.
 - **WebAssembly (WASM)**: Core logic for numeronym generation is implemented in Rust and compiled to WebAssembly for maximum performance.
-- **Rust**: The powerful and memory-safe programming language used for backend logic.
+- **Rust**: The powerful and memory-safe programming language used for numeronym generation logic.
 
 The goal of this project was to learn how to integrate code written in Rust into a web application without any web frameworks.
+
+All other dependencies were kept at a minimum, so CSS is hand-written, no templating, no JS compilation step (other than wasm bundles).
+
+---
+
+## Previews
+
+**Light mode**
+
+<img src="light-mode.png" alt="Light mode preview" width="333">
+
+**Dark mode**
+
+<img src="dark-mode.png" alt="Dark mode preview" width="333">
+
 
 ---
 
