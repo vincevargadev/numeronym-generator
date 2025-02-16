@@ -1,0 +1,15 @@
+{
+  "name": "numeronym_generator",
+  "type": "module",
+  "version": "0.1.0",
+  "files": [
+    "numeronym_generator_bg.wasm",
+    "numeronym_generator.js",
+    "numeronym_generator.d.ts"
+  ],
+  "main": "numeronym_generator.js",
+  "types": "numeronym_generator.d.ts",
+  "sideEffects": [
+    "./snippets/*"
+  ]
+}
