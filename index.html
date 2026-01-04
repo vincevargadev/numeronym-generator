@@ -91,7 +91,7 @@
       }
 
       footer .emoji {
-        filter: brightness(0.1);  
+        filter: grayscale(1) brightness(0);
       }
       
       footer a {
@@ -133,11 +133,21 @@
           }
 
           footer .emoji {
-            filter: grayscale(1) brightness(0.9);  
+            filter: grayscale(1) brightness(0) invert(1);
           }
 
           footer a {
             color: #007bff;  
+          }
+
+          input {
+            background-color: #1a1a1a;
+            color: white;
+            border-color: #444;
+          }
+
+          input::placeholder {
+            color: #888;
           }
       }
 
