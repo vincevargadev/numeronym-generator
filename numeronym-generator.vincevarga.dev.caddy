@@ -1,0 +1,9 @@
+# Caddy configuration snippet for numeronym-generator.vincevarga.dev
+# This file is deployed to /etc/caddy/conf.d/numeronym-generator.vincevarga.dev.caddy
+# The main Caddyfile imports all snippets: import /etc/caddy/conf.d/*.caddy
+
+numeronym-generator.vincevarga.dev {
+    root * /var/www/numeronym-generator.vincevarga.dev
+    file_server
+}
+

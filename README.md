@@ -43,7 +43,38 @@ All other dependencies were kept at a minimum, so CSS is hand-written, no templa
 
 ## Deployment
 
-This project is manually deployed, as frequent updates are not expected. It is designed for simple use cases with minimal maintenance.
+This project is deployed to a Scaleway server using a simple release script. The deployment uses Caddy as the web server with a modular configuration approach.
+
+### Release Process
+
+To deploy the application, run:
+
+```bash
+./release.sh
+```
+
+For additional debug output and health checks:
+
+```bash
+./release.sh --debug
+```
+
+### What the Release Script Does
+
+1. **Builds the WebAssembly package** using `wasm-pack build --target web`
+2. **Backs up the existing deployment** on the server
+3. **Copies the Caddy configuration snippet** to `/etc/caddy/conf.d/numeronym-generator.caddy`
+4. **Deploys static files** (HTML, CSS, JS, favicons) to `/var/www/numeronym-generator/`
+5. **Deploys the `pkg/` directory** containing the compiled WASM module
+6. **Reloads Caddy** to apply any configuration changes
+7. **Cleans up old backups** (keeps the latest 5)
+
+### Server Configuration
+
+The server uses Caddy with a modular configuration pattern:
+- Main Caddyfile at `/etc/caddy/Caddyfile` contains: `import /etc/caddy/conf.d/*.caddy`
+- Each project has its own snippet in `/etc/caddy/conf.d/`
+- This allows independent deployment of multiple sites
 
 ## Setup Guide
 
