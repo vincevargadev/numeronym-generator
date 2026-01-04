@@ -1,21 +1,33 @@
 use unicode_segmentation::UnicodeSegmentation;
 use wasm_bindgen::prelude::*;
 
+trait StrExt {
+    fn is_whitespace(&self) -> bool;
+}
+
+impl StrExt for str {
+    fn is_whitespace(&self) -> bool {
+        self.chars().all(char::is_whitespace)
+    }
+}
+
 #[wasm_bindgen]
 pub fn generate_numeronym(input: &str) -> String {
-    let trimmed = input.trim().to_lowercase();
-    let no_spaces: String = trimmed.chars().filter(|c| !c.is_whitespace()).collect();
-    let graphemes: Vec<&str> = no_spaces.graphemes(true).collect();
-    let len = graphemes.len();
-    if len <= 2 {
-        return no_spaces;
+    let graphemes: Vec<String> = input
+        .graphemes(true)
+        .filter(|g| !g.is_whitespace())
+        .map(|g| g.to_lowercase())
+        .collect();
+
+    match graphemes.len() {
+        0..=2 => graphemes.concat(),
+        len => format!(
+            "{}{}{}",
+            graphemes.first().map(String::as_str).unwrap_or(""),
+            len - 2,
+            graphemes.last().map(String::as_str).unwrap_or("")
+        ),
     }
-
-    let first = graphemes.first().unwrap_or(&"");
-    let last = graphemes.last().unwrap_or(&"");
-    let numeronym = format!("{}{}{}", first, len - 2, last);
-
-    numeronym
 }
 
 #[cfg(test)]
